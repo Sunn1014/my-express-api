@@ -1,0 +1,21 @@
+{
+  "name": "blog-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Sunday",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.1.4",
+    "multer": "^2.0.2",
+    "nodemon": "^3.1.11"
+  }
+}
