@@ -30,21 +30,22 @@ app.get('/',(req,res)=>{
 })
 //basic routing//\
 
-// app.get('/api/auth/register',(req,res)=>{
-//     User.find()
-//     .then(res=>{
-//       var data =[]
-//             for(i=0 ; i < res.length ; i+=1){
-//                  data.push([res[i].email, res[i].firstName, res[i].lastName, res[i].phoneNo])
-//             }
-//       console.log(data)
+app.get('/api/auth/users',(req,res)=>{
+    User.find()
+    .then(res=>{
+      var data =[]
+            for(i=0 ; i < res.length ; i+=1){
+                 data.push([res[i].email, res[i].firstName, res[i].lastName, res[i].phoneNo])
+            }
+      console.log(data)
+      res.json(result)
 
-//     })
-//     .catch(err=>{
-//         console.log(err)
-//     });
+    })
+    .catch(err=>{
+        console.log(err)
+    });
 
-// })
+})
 
 // app.post('/api/auth/register',(req,res)=>{
 // const user = new User({
