@@ -12,15 +12,14 @@ app.use("/script",express.static('public'));
 app.use(express.json());
 
 //basic app configuration and connecting to database//
-
-const Url = "mongodb+srv://cryptoairdrop20023_db_user:aKjCyvgMTTCwT1FB@blogcluster.dleljzj.mongodb.net/?appName=BlogCluster";
-const connect= mongoose.connect(Url)
-.then(()=>{
-    console.log('connected')
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, ()=>{
         console.log(`server running on ${PORT}`)
     })
+const Url = "mongodb+srv://cryptoairdrop20023_db_user:aKjCyvgMTTCwT1FB@blogcluster.dleljzj.mongodb.net/?appName=BlogCluster";
+const connect= mongoose.connect(Url)
+.then(()=>{
+    console.log('connected')
 })
 .catch(err=>{
     console.log(err)
