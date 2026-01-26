@@ -16,8 +16,12 @@ app.use(express.json());
     app.listen(PORT, ()=>{
         console.log(`server running on ${PORT}`)
     })
-const Url = "mongodb+srv://cryptoairdrop20023_db_user:aKjCyvgMTTCwT1FB@blogcluster.dleljzj.mongodb.net/?appName=BlogCluster";
-const connect= mongoose.connect(Url)
+const mongoURI = process.env.MONGO_URI;
+
+const connect= mongoose.connect(mongoURI, {
+    useNewUrlParser : true,
+    useUnifiedTopology: true,
+})
 .then(()=>{
     console.log('connected')
 })
