@@ -34,7 +34,7 @@ app.get('/',(req,res)=>{
 })
 //basic routing//\
 
-app.get('/api/auth/register',(req,res)=>{
+app.get('/api/register',(req,res)=>{
     User.find()
     .then(res=>{
       var data =[]
