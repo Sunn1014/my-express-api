@@ -42,7 +42,9 @@ app.get('/api/auth/register',(req,res)=>{
                  data.push([res[i].email, res[i].firstName, res[i].lastName, res[i].phoneNo])
             }
       console.log(data)
-      res.json(result)
+      res.json({
+        name:'hhhhh'
+      })
 
     })
     .catch(err=>{
