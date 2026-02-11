@@ -2,14 +2,18 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const User = require('./modules/user')
+const Image = require('./modules/image')
 const app = express()
-
 
 app.use(express.urlencoded({extended : true}));
 app.use(express.json());
 app.set('view engine', 'ejs');
 app.use("/script",express.static('public'));
 app.use(express.json());
+
+const storage = multer.memoryStorage()
+
+ const upload = multer({storage : storage})
 
 //basic app configuration and connecting to database//
   
@@ -33,7 +37,7 @@ app.get('/',(req,res)=>{
 })
 //basic routing//\
 
-app.get('/api/register', (req,res)=>{
+app.get('/api/users', (req,res)=>{
     User.find()
     .then(result=>{
         if(result){
@@ -48,25 +52,43 @@ app.get('/api/register', (req,res)=>{
    
 });
 
-// app.post('/api/auth/register',(req,res)=>{
-// const user = new User({
-//     email : 'sunn@gmai.com',
-//     password : '111222',
-//     firstName : 'sunn',
-//     lastName : 'shal',
-//     phoneNo : '08058054411'
-// })
+ app.get('/api/images', (req, res)=>{
+       Image.find()
+       .then(images=>{
+         const imagesData= images.map(img =>({
+          id: img._id,
+          imgId: img.imgId,
+          name: img.name,
+          contentType: img.contentType,
+          data: img.data.toString("base64") //convert buffer
+         }));
+        res.json(imagesData)
+       })
 
-// user.save()
-// .then(res=>{
-//     console.log(res)
-// })
-// .catch(err=>{
-//     console.log(err)
-// });
+       .catch(err=>{
+        console.log(err)
+        res.status(500).json({error : "server error"});
+       });
+ });
 
-// });
+ app.post('/api/images', upload.single('file'), async (req,res)=>{
+           const image = new Image({
+        imgId: req.body.imgId,
+        imageName : req.body.title,
+        name : req.file.originalname,
+        image :{
+          data : req.file.buffer,
+          contentType : req.file.mimetype
+        }
+      })
 
-// app.get('/login',(req,res)=>{
-//     res.render('../views/index.ejs')
-// })
+         image.save()
+      .then(result=>{
+        res.redirect('/')
+
+      })
+      .catch(err=>{
+        
+        console.log(err)
+      });
+ })
