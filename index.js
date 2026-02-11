@@ -37,9 +37,7 @@ app.get('/api/register', (req,res)=>{
     User.find()
     .then(result=>{
         if(result){
-     res.json({
-        "name": "hhhhh"
-      })
+     res.json(result)
         }else{
             res.send('not found')
         }
