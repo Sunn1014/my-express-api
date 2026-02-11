@@ -12,18 +12,17 @@ app.use("/script",express.static('public'));
 app.use(express.json());
 
 //basic app configuration and connecting to database//
-    const PORT = process.env.PORT || 5000;
+  
+const mongoURI = process.env.MONGO_URI;
+
+mongoose.connect(mongoURI)
+.then(()=>{
+    console.log('connected')
+      const PORT = process.env.PORT || 5000;
     app.listen(PORT, ()=>{
         console.log(`server running on ${PORT}`)
     })
-const mongoURI = process.env.MONGO_URI;
 
- mongoose.connect(mongoURI, {
-    useNewUrlParser : true,
-    useUnifiedTopology: true,
-})
-.then(()=>{
-    console.log('connected')
 })
 .catch(err=>{
     console.log(err)
