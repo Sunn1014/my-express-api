@@ -56,14 +56,15 @@ app.get('/api/users', (req,res)=>{
  app.get('/api/images', (req, res)=>{
        Image.find()
        .then(images=>{
-         const imagesData= images.map(img =>({
-          id: img._id,
-          imgId: img.imgId,
-          name: img.name,
-          contentType: img.contentType,
-          data: img.data.toString("base64") //convert buffer
-         }));
-        res.json(imagesData)
+        //  const imagesData= images.map(img =>({
+        //   id: img._id,
+        //   imgId: img.imgId,
+        //   name: img.name,
+        //   contentType: img.contentType,
+        //   data: img.data.toString("base64") //convert buffer
+        //  }));
+        // res.json(imagesData)
+        res.json(images)
        })
 
        .catch(err=>{
